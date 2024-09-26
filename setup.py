@@ -8,7 +8,7 @@ setuptools.setup(
     version="1.0.0",
     author="sxydh",
     author_email="sxydhgg@gmail.com",
-    description="TODO",
+    description="NOTHING",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/sxydh/m-pyutil",
