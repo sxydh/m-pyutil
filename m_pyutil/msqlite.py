@@ -14,6 +14,10 @@ def create(sql: str, f: str = DEFAULT_DB_FILE):
     return save(sql=sql, f=f)
 
 
+def drop(sql: str, f: str = DEFAULT_DB_FILE):
+    return save(sql=sql, f=f)
+
+
 def save(sql: str, params: list = None, f: str = DEFAULT_DB_FILE) -> int:
     while True:
         with get_conn(f) as conn:
