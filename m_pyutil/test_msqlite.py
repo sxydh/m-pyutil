@@ -11,4 +11,5 @@ class Test(TestCase):
             self.assertIsInstance(conn, sqlite3.Connection)
 
     def test_create(self):
-        create(sql='create table t_test(id integer primary autoincreamentment)')
+        rowcount = create(sql='create table if not exists t_test(id integer primary key autoincrement)')
+        self.assertEqual(rowcount, -1)
