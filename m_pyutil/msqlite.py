@@ -11,12 +11,16 @@ def get_conn(f: str = DEFAULT_DB_FILE) -> Connection:
     return sqlite3.connect(f'tmp/{f}')
 
 
+def create(sql: str, f: str = DEFAULT_DB_FILE):
+    return save(sql=sql, f=f)
+
+
 def save(sql: str, params: list = None, f: str = DEFAULT_DB_FILE) -> int:
     while True:
         with get_conn(f) as conn:
             # noinspection PyBroadException
             try:
-                cur = conn.execute(sql, params)
+                cur = conn.execute(sql, params or [])
                 conn.commit()
                 return cur.rowcount
             except Exception as e:
