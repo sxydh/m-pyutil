@@ -1,4 +1,3 @@
-import logging
 import os
 import sqlite3
 from sqlite3 import Connection
@@ -27,3 +26,8 @@ def save(sql: str, params: list = None, f: str = DEFAULT_DB_FILE) -> int:
                 if 'database is locked' in str(e):
                     continue
                 raise e
+
+
+def select(sql: str, params: list = None, f: str = DEFAULT_DB_FILE) -> list:
+    with get_conn(f) as conn:
+        return conn.execute(sql, params or []).fetchall()
