@@ -35,3 +35,8 @@ def save(sql: str, params: list = None, f: str = DEFAULT_DB_FILE) -> int:
 def select(sql: str, params: list = None, f: str = DEFAULT_DB_FILE) -> list:
     with get_conn(f) as conn:
         return conn.execute(sql, params or []).fetchall()
+
+
+def select_one(sql: str, params: list = None, f: str = DEFAULT_DB_FILE) -> tuple:
+    with get_conn(f) as conn:
+        return conn.execute(sql, params or []).fetchone()
