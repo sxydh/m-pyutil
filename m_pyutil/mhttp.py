@@ -49,11 +49,13 @@ class Server(ThreadingHTTPServer):
                  host: str = '0.0.0.0',
                  port: int = 8080,
                  is_cors: bool = True,
+                 is_logging: bool = False,
                  get_handler: Optional[Callable[[MyHTTPRequestHandler], None]] = None,
                  post_handler: Optional[Callable[[MyHTTPRequestHandler], None]] = None,
                  static_dir: str = None):
         super().__init__((host, port), lambda *args, **kwargs: MyHTTPRequestHandler(*args,
                                                                                     is_cors=is_cors,
+                                                                                    is_logging=is_logging,
                                                                                     get_handler=get_handler,
                                                                                     post_handler=post_handler,
                                                                                     directory=static_dir,
