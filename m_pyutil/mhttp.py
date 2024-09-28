@@ -19,6 +19,7 @@ class MyHTTPRequestHandler(CGIHTTPRequestHandler):
 
     def end_headers(self):
         if self.is_cors:
+            self.send_header("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
             self.send_header("Access-Control-Allow-Origin", "*")
         super().end_headers()
 
