@@ -5,7 +5,7 @@ with open("README.md", "r") as f:
 
 setuptools.setup(
     name="m_pyutil",
-    version="1.5.0",
+    version="1.5.1",
     author="sxydh",
     author_email="sxydhgg@gmail.com",
     description="NOTHING",
