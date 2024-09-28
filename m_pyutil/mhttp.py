@@ -1,6 +1,6 @@
 from http.server import CGIHTTPRequestHandler
 from http.server import ThreadingHTTPServer
-from typing import Optional, Callable
+from typing import Optional, Callable, Any
 
 
 class MyHTTPRequestHandler(CGIHTTPRequestHandler):
@@ -8,11 +8,13 @@ class MyHTTPRequestHandler(CGIHTTPRequestHandler):
     def __init__(self,
                  *args,
                  is_cors: bool = True,
+                 is_logging: bool = False,
                  get_handler: Optional[Callable[['MyHTTPRequestHandler'], None]] = None,
                  post_handler: Optional[Callable[['MyHTTPRequestHandler'], None]] = None,
                  directory=None,
                  **kwargs):
         self.is_cors = is_cors
+        self.is_logging = is_logging
         self.get_handler = get_handler
         self.post_handler = post_handler
         super().__init__(*args, directory=directory, **kwargs)
@@ -34,6 +36,10 @@ class MyHTTPRequestHandler(CGIHTTPRequestHandler):
 
     def do_POST(self):
         self.post_handler(self) if self.post_handler else super().do_POST()
+
+    def log_message(self, ft: str, *args: Any):
+        if self.is_logging:
+            super().log_message(ft, *args)
 
 
 class Server(ThreadingHTTPServer):
