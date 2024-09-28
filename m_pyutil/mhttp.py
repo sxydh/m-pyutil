@@ -26,6 +26,11 @@ class MyHTTPRequestHandler(CGIHTTPRequestHandler):
     def do_GET(self):
         self.get_handler(self) if self.get_handler else super().do_GET()
 
+    # noinspection PyPep8Naming
+    def do_OPTIONS(self):
+        self.send_response(200)
+        self.end_headers()
+
     def do_POST(self):
         self.post_handler(self) if self.post_handler else super().do_POST()
 
