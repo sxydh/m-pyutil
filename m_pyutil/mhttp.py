@@ -1,5 +1,6 @@
 from http.server import SimpleHTTPRequestHandler
 from http.server import ThreadingHTTPServer
+from typing import Optional, Callable
 
 
 class CORSHTTPRequestHandler(SimpleHTTPRequestHandler):
@@ -20,13 +21,15 @@ class Server(ThreadingHTTPServer):
 
     # noinspection PyTypeChecker
     def __init__(self,
-                 host='0.0.0.0',
-                 port=8080,
-                 is_cors=True,
-                 get_handler=None,
-                 static_dir=None):
-        handler_class = CORSHTTPRequestHandler if is_cors else SimpleHTTPRequestHandler
-        super().__init__((host, port), lambda *args, **kwargs: handler_class(*args, get_handler=get_handler, directory=static_dir, **kwargs))
+                 host: str = '0.0.0.0',
+                 port: int = 8080,
+                 is_cors: bool = True,
+                 get_handler: Optional[Callable[[SimpleHTTPRequestHandler], None]] = None,
+                 static_dir: str = None):
+        if is_cors:
+            super().__init__((host, port), lambda *args, **kwargs: CORSHTTPRequestHandler(*args, get_handler=get_handler, directory=static_dir, **kwargs))
+        else:
+            super().__init__((host, port), SimpleHTTPRequestHandler)
 
     def start(self) -> 'Server':
         self.serve_forever()
