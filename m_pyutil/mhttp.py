@@ -1,23 +1,22 @@
-import http.server
-import socketserver
-import threading
+from http.server import SimpleHTTPRequestHandler
+from http.server import ThreadingHTTPServer
 
 
-class CORSHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
+class CORSHTTPRequestHandler(SimpleHTTPRequestHandler):
 
     def end_headers(self):
         self.send_header("Access-Control-Allow-Origin", "*")
         super().end_headers()
 
 
-class Server(socketserver.TCPServer):
+class Server(ThreadingHTTPServer):
 
     def __init__(self, host='0.0.0.0', port=8080, is_cors=True):
         # noinspection PyTypeChecker
-        super().__init__((host, port), CORSHTTPRequestHandler if is_cors else http.server.SimpleHTTPRequestHandler)
+        super().__init__((host, port), CORSHTTPRequestHandler if is_cors else SimpleHTTPRequestHandler)
 
     def start(self) -> 'Server':
-        threading.Thread(target=self.serve_forever).start()
+        self.serve_forever()
         return self
 
     def close(self):
