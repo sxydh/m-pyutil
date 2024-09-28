@@ -6,8 +6,8 @@ from typing import Optional, Callable
 class CORSHTTPRequestHandler(SimpleHTTPRequestHandler):
 
     def __init__(self, *args, get_handler=None, directory=None, **kwargs):
-        super().__init__(*args, directory=directory, **kwargs)
         self.get_handler = get_handler
+        super().__init__(*args, directory=directory, **kwargs)
 
     def end_headers(self):
         self.send_header("Access-Control-Allow-Origin", "*")
