@@ -11,8 +11,8 @@ class MongoCli(MongoClient):
     def __init__(self,
                  host: str = '127.0.0.1',
                  port: int = 27017,
-                 username: str = None,
-                 password: str = None,
+                 username: str = 'root',
+                 password: str = '123',
                  database: str = 'db_demo'):
         super().__init__(f'mongodb://{username}:{password}@{host}:{port}')
         self.database = self[database]
