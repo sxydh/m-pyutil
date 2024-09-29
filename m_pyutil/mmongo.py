@@ -29,8 +29,7 @@ class MongoCli(MongoClient):
                       params: list = None,
                       collection: str = 'coll_demo'):
         with get_conn(f) as conn:
-            sqlite_cursor = conn.execute(sql=sql or f'select * from {table}',
-                                         parameters=params or [])
+            sqlite_cursor = conn.execute(sql or f'select * from {table}', params or [])
             rows = sqlite_cursor.fetchall()
             columns = [column[0] for column in sqlite_cursor.description]
 
