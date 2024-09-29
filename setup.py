@@ -14,7 +14,7 @@ setuptools.setup(
     url="https://github.com/sxydh/m-pyutil",
     packages=setuptools.find_packages(),
     install_requires=[
-        'pymongo',
+        'pymongo:',
     ],
     classifiers=[
         "Programming Language :: Python :: 3",
