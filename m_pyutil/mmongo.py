@@ -11,8 +11,10 @@ class MongoCli(MongoClient):
     def __init__(self,
                  host: str = '127.0.0.1',
                  port: int = 27017,
+                 username: str = None,
+                 password: str = None,
                  database: str = 'db_demo'):
-        super().__init__(host=host, port=port)
+        super().__init__(f'mongodb://{username}:{password}@{host}:{port}')
         self.database = self[database]
 
     def import_json_file(self,
