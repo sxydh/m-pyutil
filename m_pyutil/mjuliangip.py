@@ -22,7 +22,8 @@ class DynamicIP:
                  ip_time: int = 180):
         self.api_key = api_key
         self.ip_time = ip_time
-        create(sql='create table if not exists t_ip(id integer primary key autoincrement, ip text, expire_time text, create_time text)')
+        create(sql='create table if not exists t_ip(id integer primary key autoincrement, ip text, expire_time text, create_time text)',
+               f=DB_FILE)
 
     def get_ips(self,
                 trade_no: str,
