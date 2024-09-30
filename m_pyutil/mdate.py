@@ -26,6 +26,21 @@ def nowd() -> str:
     return datetime.datetime.now().strftime(Format.YYYY_MM_DD.value)
 
 
+def add_secs(time_str: str,
+             delta: int = 1) -> str:
+    return add_times(time_str=time_str, delta=delta, delta_type=DeltaType.SEC)[:len(time_str)]
+
+
+def add_mins(time_str: str,
+             delta: int = 1) -> str:
+    return add_times(time_str=time_str, delta=delta, delta_type=DeltaType.MIN)[:len(time_str)]
+
+
+def add_hours(time_str: str,
+              delta: int = 1) -> str:
+    return add_times(time_str=time_str, delta=delta, delta_type=DeltaType.HOUR)[:len(time_str)]
+
+
 def add_days(date_str: str,
              delta: int = 1) -> str:
     return add_times(time_str=date_str, delta=delta, delta_type=DeltaType.DAY)[:len(date_str)]
