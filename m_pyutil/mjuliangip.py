@@ -33,7 +33,7 @@ class DynamicIP:
         ips = []
         if not force:
             now_time = add_secs(nowt(), -1)
-            ips = select(sql='select ip from t_ip where expire_time <= ? limit ?',
+            ips = select(sql='select ip from t_ip where expire_time >= ? limit ?',
                          params=[now_time, num],
                          f=DB_FILE)
             if len(ips) >= num:
