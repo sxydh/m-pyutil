@@ -12,6 +12,15 @@ class Test(TestCase):
     def test_nowd(self):
         self.assertEqual(mdate.nowd(), datetime.datetime.now().strftime('%Y-%m-%d'))
 
+    def test_add_secs(self):
+        self.assertEqual(mdate.add_secs('2021-01-01 00:00:00', 1), '2021-01-01 00:00:01')
+
+    def test_add_mins(self):
+        self.assertEqual(mdate.add_mins('2021-01-01 00:00:00', 1), '2021-01-01 00:01:00')
+
+    def test_add_hours(self):
+        self.assertEqual(mdate.add_hours('2021-01-01 00:00:00', 1), '2021-01-01 01:00:00')
+
     def test_add_days(self):
         self.assertEqual(mdate.add_days('2021-01-01 00:01', 1), '2021-01-02 00:01')
 
