@@ -17,11 +17,8 @@ class ProxyProtocol(Enum):
 
 class DynamicIP:
 
-    def __init__(self,
-                 api_key: str,
-                 ip_time: int = 180):
+    def __init__(self, api_key: str):
         self.api_key = api_key
-        self.ip_time = ip_time
         create(sql='create table if not exists t_ip(id integer primary key autoincrement, ip text, expire_time text, create_time text)',
                f=DB_FILE)
 
@@ -51,11 +48,17 @@ class DynamicIP:
         if code != 200:
             logging.warning(f'get ips failed: {res_json}')
             return ips
-        ips = res_json['data']['proxy_list']
+        proxy_list = res_json['data']['proxy_list']
 
-        for ip in ips:
+        for proxy in proxy_list:
+            proxy = proxy.split(',')
+            host_port = proxy[0]
+            time_user_pwd = proxy[1].split(':')
+            time = time_user_pwd[0]
+            user = time_user_pwd[1]
+            pwd = time_user_pwd[2]
             save(sql='insert into t_ip(ip, expire_time, create_time) values(?, ?, ?)',
-                 params=[ip, add_secs(nowt(), self.ip_time), nowt()],
+                 params=[f'{user}:{pwd}@{host_port}', add_secs(nowt(), time), nowt()],
                  f=DB_FILE)
 
         return ips
