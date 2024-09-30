@@ -18,7 +18,7 @@ class JuLiangIP:
                         trade_no: str,
                         num: int = 1,
                         protocol: ProxyProtocol = ProxyProtocol.HTTP):
-        url = f'auth_type=2&auto_white=1&ip_remain=1&num={num}&pt={protocol}&result_type=json&trade_no={trade_no}&key={self.api_key}'
+        url = f'auth_type=2&auto_white=1&ip_remain=1&num={num}&pt={protocol.value}&result_type=json&trade_no={trade_no}&key={self.api_key}'
         url = f'{url}&sign={hashlib.md5(url.encode("utf-8")).hexdigest()}'
         url = f'http://v2.api.juliangip.com/company/dynamic/getips?{url}'
         return requests.get(url)
