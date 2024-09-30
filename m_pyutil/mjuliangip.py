@@ -1,6 +1,8 @@
 import hashlib
 import logging
+import uuid
 from enum import Enum
+from sqlite3 import IntegrityError
 
 import requests
 
@@ -21,6 +23,8 @@ class DynamicIP:
         self.api_key = api_key
         create(sql='create table if not exists t_ip(id integer primary key autoincrement, ip text, expire_time text, create_time text)',
                f=DB_FILE)
+        create(sql='create table if not exists t_lock(id integer primary key autoincrement, uid text unique not null, lock_id text unique not null)',
+               f=DB_FILE)
 
     def get_ips(self,
                 trade_no: str,
@@ -36,6 +40,14 @@ class DynamicIP:
             ips = [ip[0] for ip in ips]
             if len(ips) >= num:
                 return ips
+
+        uid = str(uuid.uuid4())
+        try:
+            save(sql='insert into t_lock(uid, lock_id) values(?, ?)',
+                 params=[uid, 'get_ips'],
+                 f=DB_FILE)
+        except IntegrityError:
+            return ips
 
         url = f'auth_type=2&auto_white=1&ip_remain=1&num={num}&pt={protocol.value}&result_type=json&trade_no={trade_no}&key={self.api_key}'
         url = f'{url}&sign={hashlib.md5(url.encode("utf-8")).hexdigest()}'
@@ -63,5 +75,9 @@ class DynamicIP:
                  params=[ip, add_secs(nowt(), time), nowt()],
                  f=DB_FILE)
             ips.append(ip)
+
+        save(sql='delete from t_lock where uid = ?',
+             params=[uid],
+             f=DB_FILE)
 
         return ips
