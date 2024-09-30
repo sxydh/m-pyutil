@@ -57,8 +57,10 @@ class DynamicIP:
             time = int(time_user_pwd[0])
             user = time_user_pwd[1]
             pwd = time_user_pwd[2]
+            ip = f'{user}:{pwd}@{host_port}'
             save(sql='insert into t_ip(ip, expire_time, create_time) values(?, ?, ?)',
-                 params=[f'{user}:{pwd}@{host_port}', add_secs(nowt(), time), nowt()],
+                 params=[ip, add_secs(nowt(), time), nowt()],
                  f=DB_FILE)
+            ips.append(ip)
 
         return ips
