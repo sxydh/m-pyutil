@@ -11,8 +11,11 @@ class ProxyProtocol(Enum):
 
 class DynamicIP:
 
-    def __init__(self, api_key: str):
+    def __init__(self,
+                 api_key: str,
+                 ip_time: int = 180):
         self.api_key = api_key
+        self.ip_time = ip_time
 
     def dynamic_get_ips(self,
                         trade_no: str,
