@@ -33,8 +33,9 @@ class DynamicIP:
             ips = select(sql='select ip from t_ip where expire_time >= ? limit ?',
                          params=[now_time, num],
                          f=DB_FILE)
+            ips = [ip[0] for ip in ips]
             if len(ips) >= num:
-                return [ip[0] for ip in ips]
+                return ips
 
         url = f'auth_type=2&auto_white=1&ip_remain=1&num={num}&pt={protocol.value}&result_type=json&trade_no={trade_no}&key={self.api_key}'
         url = f'{url}&sign={hashlib.md5(url.encode("utf-8")).hexdigest()}'
