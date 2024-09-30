@@ -28,7 +28,7 @@ class DynamicIP:
                 trade_no: str,
                 num: int = 1,
                 protocol: ProxyProtocol = ProxyProtocol.HTTP,
-                force: bool = True) -> list:
+                force: bool = False) -> list:
         ips = []
         if not force:
             now_time = add_secs(nowt(), -1)
