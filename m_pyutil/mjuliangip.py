@@ -54,7 +54,7 @@ class DynamicIP:
             proxy = proxy.split(',')
             host_port = proxy[0]
             time_user_pwd = proxy[1].split(':')
-            time = time_user_pwd[0]
+            time = int(time_user_pwd[0])
             user = time_user_pwd[1]
             pwd = time_user_pwd[2]
             save(sql='insert into t_ip(ip, expire_time, create_time) values(?, ?, ?)',
