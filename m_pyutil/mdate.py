@@ -1,7 +1,7 @@
 import datetime
 
 
-def now() -> str:
+def nowt() -> str:
     return datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
 
 
