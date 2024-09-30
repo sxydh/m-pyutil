@@ -9,7 +9,7 @@ class ProxyProtocol(Enum):
     SOCKS = '2'
 
 
-class JuLiangIP:
+class DynamicIP:
 
     def __init__(self, api_key: str):
         self.api_key = api_key
