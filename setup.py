@@ -5,7 +5,7 @@ with open("README.md", "r") as f:
 
 setuptools.setup(
     name="m_pyutil",
-    version="1.8.0",
+    version="1.9.0",
     author="sxydh",
     author_email="sxydhgg@gmail.com",
     description="NOTHING",
@@ -17,6 +17,7 @@ setuptools.setup(
     extras_require={
         'mmongo': ['pymongo>=4.9.1'],
         'mip': ['psutil>=6.0.0'],
+        'mselenium': ['selenium>=4.23.1']
     },
     classifiers=[
         "Programming Language :: Python :: 3",
