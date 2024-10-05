@@ -1,5 +1,5 @@
 from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.remote.webdriver import WebDriver
+from selenium.webdriver.chrome.webdriver import WebDriver
 from undetected_chromedriver import Chrome
 
 from m_pyutil.selenium.moperator import Operator
