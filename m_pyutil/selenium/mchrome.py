@@ -25,7 +25,7 @@ class ChromeCli(WebDriver):
         if proxy:
             options.add_argument(f'--proxy-server={proxy}')
         if headless:
-            options.add_argument('--headless')
+            options.add_argument('--headless=new')
         if images_disabled:
             options.add_argument('--blink-settings=imagesEnabled=false')
         if extensions:
