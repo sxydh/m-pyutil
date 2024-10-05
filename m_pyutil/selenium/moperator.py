@@ -9,7 +9,8 @@ from selenium.webdriver.support import expected_conditions as ec
 from selenium.webdriver.support.wait import WebDriverWait
 
 
-class Operator(WebDriver):
+# noinspection PyTypeChecker
+class Operator:
 
     # noinspection PyMissingConstructor
     def __init__(self):
