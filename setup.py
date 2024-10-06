@@ -17,7 +17,7 @@ setuptools.setup(
     extras_require={
         'mmongo': ['pymongo>=4.9.1'],
         'mip': ['psutil>=6.0.0'],
-        'mselenium': ['selenium>=4.23.1']
+        'mselenium': ['selenium>=4.23.1', 'undetected_chromedriver>=3.5.5']
     },
     classifiers=[
         "Programming Language :: Python :: 3",
