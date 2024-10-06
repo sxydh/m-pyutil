@@ -3,3 +3,4 @@ requests~=2.32.3
 pymongo~=4.9.1
 psutil~=6.0.0
 selenium~=4.23.1
+undetected_chromedriver~=3.5.5
