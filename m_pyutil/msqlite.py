@@ -50,3 +50,11 @@ def selectd(sql: str, params: list = None, f: str = DEFAULT_DB_FILE) -> list[dic
 def select_one(sql: str, params: list = None, f: str = DEFAULT_DB_FILE) -> tuple:
     with get_conn(f) as conn:
         return conn.execute(sql, params or []).fetchone()
+
+
+def selectd_one(sql: str, params: list = None, f: str = DEFAULT_DB_FILE) -> dict:
+    with get_conn(f) as conn:
+        cur = conn.execute(sql, params or [])
+        cols = [col[0] for col in cur.description]
+        row = cur.fetchone()
+        return dict(zip(cols, row))
