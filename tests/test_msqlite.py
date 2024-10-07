@@ -2,7 +2,7 @@ import sqlite3
 import uuid
 from unittest import TestCase
 
-from m_pyutil.msqlite import get_conn, create, drop, save, select, select_one
+from m_pyutil.msqlite import get_conn, create, drop, save, select, select_one, selectd
 
 
 class Test(TestCase):
@@ -29,6 +29,11 @@ class Test(TestCase):
     def test_select(self):
         self.test_save()
         rows = select(sql=f'select * from {self.table_name}')
+        self.assertIs(len(rows) > 0, True)
+
+    def test_selectd(self):
+        self.test_save()
+        rows = selectd(sql=f'select * from {self.table_name}')
         self.assertIs(len(rows) > 0, True)
 
     def test_select_one(self):
