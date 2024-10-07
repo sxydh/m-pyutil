@@ -4,8 +4,8 @@ with open("README.md", "r") as f:
     long_description = f.read()
 
 setuptools.setup(
-    name="m_pyutil",
-    version="1.9.1",
+    name="m-pyutil",
+    version="1.9.2",
     author="sxydh",
     author_email="sxydhgg@gmail.com",
     description="NOTHING",
