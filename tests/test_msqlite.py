@@ -2,7 +2,7 @@ import sqlite3
 import uuid
 from unittest import TestCase
 
-from m_pyutil.msqlite import get_conn, create, drop, save, select, select_one, selectd
+from m_pyutil.msqlite import get_conn, create, drop, save, select, select_one, selectd, selectd_one
 
 
 class Test(TestCase):
@@ -40,3 +40,8 @@ class Test(TestCase):
         self.test_save()
         row = select_one(sql=f'select * from {self.table_name}')
         self.assertEqual(row[0], 1)
+
+    def test_selectd_one(self):
+        self.test_save()
+        row = selectd_one(sql=f'select * from {self.table_name}')
+        self.assertEqual(row.get('id'), 1)
