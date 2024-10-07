@@ -37,6 +37,16 @@ def select(sql: str, params: list = None, f: str = DEFAULT_DB_FILE) -> list:
         return conn.execute(sql, params or []).fetchall()
 
 
+def selectd(sql: str, params: list = None, f: str = DEFAULT_DB_FILE) -> list[dict]:
+    with get_conn(f) as conn:
+        cur = conn.execute(sql, params or [])
+        cols = [col[0] for col in cur.description]
+        rows = []
+        for row in cur.fetchall():
+            rows.append(dict(zip(cols, row)))
+        return rows
+
+
 def select_one(sql: str, params: list = None, f: str = DEFAULT_DB_FILE) -> tuple:
     with get_conn(f) as conn:
         return conn.execute(sql, params or []).fetchone()
