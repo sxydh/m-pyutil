@@ -3,6 +3,7 @@ import random
 import time
 
 from selenium.webdriver import ActionChains
+from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webdriver import WebDriver
 from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.support import expected_conditions as ec
@@ -14,40 +15,40 @@ class Operator:
 
     # noinspection PyMissingConstructor
     def __init__(self):
-        raise NotImplementedError("这个类不能被实例化")
+        raise TypeError("This class is not instantiable")
 
     def query_element_d(self,
-                        by: str,
                         value: str,
+                        by: str = By.CSS_SELECTOR,
                         timeout: int = 10,
                         count: int = 3,
                         raise_e: bool = True) -> WebElement:
-        return self.query_element(src=self, by=by, value=value, timeout=timeout, count=count, raise_e=raise_e)
+        return self.query_element(src=self, value=value, by=by, timeout=timeout, count=count, raise_e=raise_e)
 
     def query_element(self,
                       src: WebDriver or WebElement,
-                      by: str,
                       value: str,
+                      by: str = By.CSS_SELECTOR,
                       timeout: int = 10,
                       count: int = 3,
                       raise_e: bool = True) -> WebElement or None:
-        elements = self.query_elements(src=src, by=by, value=value, timeout=timeout, count=count, raise_e=raise_e)
+        elements = self.query_elements(src=src, value=value, by=by, timeout=timeout, count=count, raise_e=raise_e)
         if elements:
             return elements[0]
         return None
 
     def query_elements_d(self,
-                         by: str,
                          value: str,
+                         by: str = By.CSS_SELECTOR,
                          timeout: int = 10,
                          count: int = 3,
                          raise_e: bool = True) -> list[WebElement]:
-        return self.query_elements(src=self, by=by, value=value, timeout=timeout, count=count, raise_e=raise_e)
+        return self.query_elements(src=self, value=value, by=by, timeout=timeout, count=count, raise_e=raise_e)
 
     def query_elements(self,
                        src: WebDriver or WebElement,
-                       by: str,
                        value: str,
+                       by: str = By.CSS_SELECTOR,
                        timeout: int = 10,
                        count: int = 3,
                        raise_e: bool = True) -> list[WebElement]:
