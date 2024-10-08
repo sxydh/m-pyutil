@@ -1,9 +1,8 @@
-from unittest import TestCase
-
 from m_pyutil.mip import get_ip, get_netmask, get_broadcast
+from tests._TestCase import _TestCase
 
 
-class Test(TestCase):
+class Test(_TestCase):
 
     def test_get_ip(self):
         ip = get_ip()

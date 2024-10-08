@@ -1,11 +1,11 @@
 import sqlite3
 import uuid
-from unittest import TestCase
 
 from m_pyutil.msqlite import get_conn, create, drop, save, select, select_one, selectd, selectd_one
+from tests._TestCase import _TestCase
 
 
-class Test(TestCase):
+class Test(_TestCase):
     table_name = 't_test'
 
     def test_get_conn(self):

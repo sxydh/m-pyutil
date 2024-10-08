@@ -1,11 +1,11 @@
 import uuid
-from unittest import TestCase
 
 from m_pyutil.mmongo import MongoCli
 from m_pyutil.msqlite import create, save
+from tests._TestCase import _TestCase
 
 
-class Test(TestCase):
+class Test(_TestCase):
 
     def test_import_sqlite(self):
         mongo_cli = MongoCli(host='192.168.233.129')

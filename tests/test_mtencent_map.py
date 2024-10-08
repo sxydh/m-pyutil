@@ -1,10 +1,10 @@
 import os
-from unittest import TestCase
 
 from m_pyutil.mtencent_map import TencentMap
+from tests._TestCase import _TestCase
 
 
-class TestTencentMap(TestCase):
+class TestTencentMap(_TestCase):
 
     def test_geocoder(self):
         tencent_map = TencentMap(os.environ.get('TENCENT_MAP_KEY'))

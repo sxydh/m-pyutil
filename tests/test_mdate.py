@@ -1,10 +1,10 @@
 import datetime
-from unittest import TestCase
 
 from m_pyutil import mdate
+from tests._TestCase import _TestCase
 
 
-class Test(TestCase):
+class Test(_TestCase):
 
     def test_nowt(self):
         self.assertEqual(mdate.nowt(), datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'))

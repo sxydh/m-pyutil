@@ -1,7 +1,7 @@
-from unittest import TestCase
+from tests._TestCase import _TestCase
 
 
-class Test(TestCase):
+class Test(_TestCase):
 
     def test_server(self):
         pass

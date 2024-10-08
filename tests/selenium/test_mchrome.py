@@ -1,9 +1,8 @@
-from unittest import TestCase
-
 from m_pyutil.selenium.mchrome import ChromeCli, UcChromeCli
+from tests._TestCase import _TestCase
 
 
-class TestChromeCli(TestCase):
+class TestChromeCli(_TestCase):
 
     def test_get(self):
         chrome_cli = ChromeCli()
@@ -13,7 +12,7 @@ class TestChromeCli(TestCase):
         self.assertIsInstance(nav_text, str)
 
 
-class TestUcChromeCli(TestCase):
+class TestUcChromeCli(_TestCase):
 
     def test_get(self):
         uc_chrome_cli = UcChromeCli()
