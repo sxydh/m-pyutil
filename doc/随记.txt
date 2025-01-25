@@ -1,0 +1,39 @@
+开始（ https://blog.csdn.net/yifengchaoran/article/details/113447773 ）
+    测试环境
+        https://test.pypi.org/
+            gAAAAABnlIDhNb7-nLNYnLHb2z7bgsmyStMRCgZyfMwdNlVsoz_ol5XmVSXI8_Kwnd7wppTd3_R4AFTe4oQmWE4y9G_HaNxe3w==
+            gAAAAABnlID5LhosleuKCwWwJp520-ZVoftrz1eDDdXPR-U3xupklPYKkmxEOwGQsBoRkLK_qV19jC0w9-Q9T-EdXbIJKFdeTw==
+            gAAAAABm9XnxZtmHD3e40NagvYJYxn59O3bw9W5sF7gpoD9zMCH4VraqUwjNtlkOyRNZpExiaAwCd_VR91gTFVAGapmNKv7-ZRVOGMiPhrPmkDoF7I2cyV1IjPReuOyW4rrDz6ujCbnLetL9Kx7DWRDHk_YBtMykUA2pyH6e6orsdwRJOLwuo-itS67dX4XG5MPvVSbXuKuf5keliPZySp1F-HGBVvOjloONxnKtxpZCtQQD3K58t1FAMF9WXE1dMeUklO0GP-Yj
+            
+                pip install --upgrade -i https://pypi.tuna.tsinghua.edu.cn/simple setuptools wheel
+                pip install --upgrade -i https://pypi.tuna.tsinghua.edu.cn/simple twine
+                    安装 twine 软件，用于上传分发文件。
+                    
+                rmdir build dist m_pyutil.egg-info /s /q
+                python setup.py sdist bdist_wheel
+                    sdist ：源代码分发（ Source Distribution ），创建一个包含项目源代码的压缩包。
+                    bdist_wheel ：二进制分发（ Binary Distribution Wheel ），创建一个 whl 二进制包文件，可以被快速安装。
+                    
+                        此时可以通过 pip install <file_name.whl> 来安装使用二进制分法包文件
+                        
+                python -m twine upload --repository testpypi dist/*
+                    -m ：以模块的方式运行后面的命令，模块运行方式允许你执行一个模块中的主函数。
+                    
+                    上传分发文件到测试环境
+                    
+                    验证：
+                        https://test.pypi.org/
+                        pip install -i https://test.pypi.org/simple/ "m-pyutil[mip]==1.9.0"
+    正式环境
+        https://pypi.org/
+            gAAAAABnlIDhNb7-nLNYnLHb2z7bgsmyStMRCgZyfMwdNlVsoz_ol5XmVSXI8_Kwnd7wppTd3_R4AFTe4oQmWE4y9G_HaNxe3w==
+            gAAAAABnlID5LhosleuKCwWwJp520-ZVoftrz1eDDdXPR-U3xupklPYKkmxEOwGQsBoRkLK_qV19jC0w9-Q9T-EdXbIJKFdeTw==
+            gAAAAABm-TDMmUNx2RocrY90S0HX5BgLGm3NbBFCG49Es4mqdn7F9WVMbicaM9UoTga8djYLJaSwJ5y9DLQdFmP0aLJBzvdrvwQ6qMu3Xe-BbcQboupKB1dQqEhnSSy0OF_CC8m4DmpfW3FYnQsMjsjk46U3BTB7cud9PI66rD3YZqp1qQFCH0SbuFBus9pWLmnhSzSCT3q1WYy68Je7V6qW2gb_h61FbPwfUm_PG_jdo5avQ3S-NYEx8_2uU_hXMB4UUZxMoJLN
+            
+                ...
+                
+                python -m twine upload dist/*
+                    上传分发文件到正式环境
+                    
+                    验证：
+                        pip install "m-pyutil[mip]==1.9.0"
